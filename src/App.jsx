@@ -1,34 +1,26 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import Navbar from "./components/navbar";
-import LeftBar from "./components/leftbar";
-import RightBar from "./components/rightbar";
-import Feed from "./components/feed";
-import GmailTabsStyle from "./components/tab";
+import { Grid, makeStyles } from '@material-ui/core';
+import Feed from './components/feed';
+import Tabs from './components/tab';
 
-const useStyles = makeStyles((theme) => ({
-  right: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+import Relatedproducts from './components/Relatedproducts';
+
+const useStyles = makeStyles(({ breakpoints, spacing }) => ({
+  page: {
+    padding: '1rem .5rem 0 .5rem ',
+    fontFamily: 'Helvetica',
+    [breakpoints.up('md')]: {
+      padding: '1rem 8rem 0 8rem ',
     },
   },
 }));
+
 const App = () => {
   const classes = useStyles();
   return (
-    <div>
-      <Navbar />
-      <Grid container>
-        <Grid item sm={2} xs={2}>
-          <LeftBar />
-        </Grid>
-        <Grid item sm={7} xs={10}>
-          <Feed />
-          <GmailTabsStyle />
-        </Grid>
-        <Grid item sm={3} className={classes.right}>
-          <RightBar />
-        </Grid>
-      </Grid>
+    <div className={classes.page}>
+      <Feed />
+      <Tabs />
+      <Relatedproducts />
     </div>
   );
 };

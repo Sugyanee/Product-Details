@@ -1,104 +1,83 @@
-import React from "react";
-import cx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import TextInfoContent from "@mui-treasury/components/content/textInfo";
-import { useBlogTextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/blog";
-import { useOverShadowStyles } from "@mui-treasury/styles/shadow/over";
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
-    marginTop: spacing(10),
-    margin: "auto",
-    borderRadius: spacing(2), // 16px
-    transition: "0.3s",
-    boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
-    position: "relative",
-    maxWidth: 500,
-    marginLeft: "13.2rem",
-    overflow: "hidden",
-    background: "#ffffff",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    paddingBottom: spacing(2),
-    [breakpoints.up("md")]: {
-      flexDirection: "row",
-      paddingTop: spacing(2),
-      marginBottom: spacing(10),
+    height: '80vh',
+    backgroundColor: '#EEEEEE',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    [breakpoints.up('sm')]: {
+      flexDirection: 'row',
     },
   },
-  media: {
-    width: "88%",
-    height: "100%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: spacing(12),
-
-    paddingBottom: "88%",
-    borderRadius: spacing(2),
-    backgroundColor: "#fff",
-    position: "relative",
-    [breakpoints.up("md")]: {
-      width: "100%",
-      marginLeft: spacing(2),
-      marginTop: 0,
-      transform: "translateX(-8px)",
-      overflow: "hidden",
-    },
-    "&:after": {
-      content: '" "',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-
-      borderRadius: spacing(2), // 16
-      opacity: 0.5,
+  description: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    height: '40%',
+    maxWidth: '100%',
+    [breakpoints.up('sm')]: {
+      maxWidth: '45%',
     },
   },
-  content: {
-    padding: 24,
+  img: {
+    height: '35vh',
+    [breakpoints.up('sm')]: {
+      height: '65vh',
+    },
   },
-  cta: {
-    marginTop: 24,
-    textTransform: "initial",
-  },
+  buttonStyles: {},
 }));
 
-export const BlogCardDemo = React.memo(function BlogCard() {
-  const styles = useStyles();
-  const { button: buttonStyles, ...contentStyles } =
-    useBlogTextInfoContentStyles();
-  const shadowStyles = useOverShadowStyles();
+export default function Product() {
+  const classes = useStyles();
   return (
-    <Card className={cx(styles.root, shadowStyles.root)}>
-      <CardMedia
-        className={styles.media}
-        image={
-          "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/10251873/2019/8/6/c1549bb0-2b4c-4c4a-9889-d3c0d0c6dbbf1565083224331-Maybelline-New-York-220-Natural-Beige-Fit-Me-Matte--Poreless-1.jpg"
-        }
-      />
-      <CardContent>
-        <TextInfoContent
-          classes={contentStyles}
-          overline={"Foundation Cream"}
-          heading={"MAYBELLINE FIT me!"}
-          body={
-            "You can return the product within 15 days if the delivered product is damaged,expired,different from ordered."
-          }
-        />
-        <Button className={buttonStyles} startIcon={<ShoppingCartIcon />}>
-          ADD TO CART
-        </Button>
-      </CardContent>
-    </Card>
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth='md'>
+        <div className={classes.root}>
+          <div>
+            <img
+              className={classes.img}
+              src={
+                'https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/10251873/2019/8/6/c1549bb0-2b4c-4c4a-9889-d3c0d0c6dbbf1565083224331-Maybelline-New-York-220-Natural-Beige-Fit-Me-Matte--Poreless-1.jpg'
+              }
+              alt='product'
+            />
+          </div>
+          <div className={classes.description}>
+            <Typography variant='h5' component='p'>
+              Nykaa Foundation Cream
+            </Typography>
+            <p>Brand : Nykaa </p>
+            <p>
+              <Rating
+                name='products rating'
+                precision={0.5}
+                value='3.5'
+                readOnly
+              />
+            </p>
+            <p>₹ 300.00</p>
+            <Button
+              variant='contained'
+              color='secondary'
+              startIcon={<ShoppingCartIcon />}
+            >
+              ADD TO CART
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </React.Fragment>
   );
-});
-
-export default BlogCardDemo;
+}
